@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../lib/jquery-ui-1.8.4.css" />
+	<link rel="stylesheet" type="text/css" href="reset.css" />  
+	<title>jQuery Gantt</title>
+</head>
+<style>
+	.outer_1 {
+		display: flex;
+		flex-direction: column;
+		height: 99vh;
+		width: 50%;
+	}
+
+	.outer_2 {
+		display: flex;
+		flex-direction: column;
+		height: 99vh;
+		width: auto;
+		max-width: 100%;
+	}
+
+	.block_ {
+		height: 50%;
+	}
+
+	.block_-12 {
+		height: 100% !important;
+	}
+
+	.block_-1,
+	.block_-2,
+	.block_-12 {
+		resize: vertical;
+		overflow: auto;
+	}
+
+	.block_-2 {
+		flex: 1;
+	}
+
+	.sliderx_ {
+		text-align: center;
+		letter-spacing: 10px;
+		background-color: #a3da97;
+		cursor: row-resize;
+		user-select: none;
+		height: 5px;
+		border: 1px solid #7e7c7c;
+	}
+
+	/*  */
+	.outer_main {
+		display: flex;
+		flex-direction: row;
+		overflow: hidden;
+	}
+
+	.splitter {
+		flex: 0 0 auto;
+		width: 8px;
+		background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+		min-height: 100%;
+	}
+</style>
+
+<body>
+	<div class="outer_main">
+		<div class="outer_1">
+			<div class="block_ block_-1" id="ganttChart">
+				<div class="table-reponsive">
+					<table class="table table-sm table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th colspan="7"></th>
+								<th colspan="4" class="text-center">Required Qty</th>
+							</tr>
+							<tr>
+								<th>Stock Status</th>
+								<th>Component <br> Material</th>
+								<th>Job Order</th>
+								<th>Base Material</th>
+								<th>Job Qty</th>
+								<th>Comp Type</th>
+								<th>Avail Stock</th> 
+								<th>Required Qty</th>
+								<th>Reserve Qty</th>
+								<th>Issued Qty</th>
+								<th>Net Req. Qty</th>
+								<th>Unit</th>
+								<th>Planning</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>R</td>
+								<td>dfegrrhg34756jhtedvf</td>
+								<td>643575</td>
+								<td>dfegrrhg34756jhtedvf</td>
+								<td>643575</td>
+								<td>Fabric[7]</td>
+								<td>158741</td>
+								<td>10</td>
+								<td>0</td>
+								<td>0.000</td>
+								<td>10</td>
+								<td>Meters</td>
+								<td>
+									<button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+									<button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+								</td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="sliderx_"></div>
+			<div class="block_ block_-2" id="ganttCharttwo">
+			</div>
+		</div>
+		<div class="splitter"></div>
+		<div class="outer_2">
+			<div class="block_ block_-12" id="ganttChart2">
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../lib/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="../lib/jquery-ui-1.8.4.js"></script>
+
+	<script type="text/javascript">
+		let block = document.querySelector(".block_-1"),
+			slider = document.querySelector(".sliderx_");
+		slider.onmousedown = function dragMouseDown(e) {
+			let dragX = e.clientY;
+			document.onmousemove = function onMouseMove(e) {
+				block.style.height = block.offsetHeight + e.clientY - dragX + "px";
+				dragX = e.clientY;
+			};
+			document.onmouseup = () => (document.onmousemove = document.onmouseup = null);
+		};
+
+		$(".outer_1").resizable({
+			handleSelector: ".splitter",
+			resizeHeight: false
+		});
+	</script>
+</body>
+
+</html>
